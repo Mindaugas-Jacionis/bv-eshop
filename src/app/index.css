@@ -4,21 +4,6 @@
   min-height: 100vh;
 }
 
-.Header {
-  background: #6ac46a;
-  padding: 15px 30px;
-  position: relative;
-}
-
-.Header .Header__logo {
-  max-height: 50px;
-  position: absolute;
-  left: 70px;
-  top: 0px;
-  background: #f1f1f1;
-  border: 1px solid #e1e1e1;
-}
-
 .Main {
   max-width: 1020px;
   margin: 0 auto;
@@ -37,10 +22,4 @@
   border: 1px solid #e1e1e1;
   margin: 10px;
   border-radius: 5px;
-}
-
-.Footer {
-  background: #6ac46a;
-  text-align: center;
-  padding: 10px 20px;
 }

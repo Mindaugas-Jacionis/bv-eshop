@@ -1,12 +1,13 @@
 import React from "react";
 import "./index.css";
 
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <div className="App">
-      <header className="Header">
-        <img className="Header__logo" src="https://logodix.com/logo/2004335.png" alt="Logo" />
-      </header>
+      <Header />
       <main className="Main">
         <div className="ProductsList">
           <ul>
@@ -61,7 +62,7 @@ function App() {
           </ul>
         </div>
       </main>
-      <footer className="Footer">Copryght {new Date().getFullYear()}</footer>
+      <Footer />
     </div>
   );
 }
