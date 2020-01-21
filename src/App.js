@@ -1,24 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="Header">
+        <img className="Header__logo" src="https://logodix.com/logo/2004335.png" alt="Logo" />
       </header>
+      <main className="Main">
+        <div className="ProductsList">
+          <ul>
+            <li className="ProductsList__item">
+              <h3>Microvawe</h3>
+              <p>Very Nice Short Description</p>
+              <div>
+                <p>$30</p>
+                <button>Add to Cart</button>
+              </div>
+            </li>
+            <li className="ProductsList__item">
+              <h3>Microvawe</h3>
+              <p>Very Nice Short Description</p>
+              <div>
+                <p>$30</p>
+                <button>Add to Cart</button>
+              </div>
+            </li>
+            <li className="ProductsList__item">
+              <h3>Microvawe</h3>
+              <p>Very Nice Short Description</p>
+              <div>
+                <p>$30</p>
+                <button>Add to Cart</button>
+              </div>
+            </li>
+            <li className="ProductsList__item">
+              <h3>Microvawe</h3>
+              <p>Very Nice Short Description</p>
+              <div>
+                <p>$30</p>
+                <button>Add to Cart</button>
+              </div>
+            </li>
+            <li className="ProductsList__item">
+              <h3>Microvawe</h3>
+              <p>Very Nice Short Description</p>
+              <div>
+                <p>$30</p>
+                <button>Add to Cart</button>
+              </div>
+            </li>
+            <li className="ProductsList__item">
+              <h3>Microvawe</h3>
+              <p>Very Nice Short Description</p>
+              <div>
+                <p>$30</p>
+                <button>Add to Cart</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </main>
+      <footer className="Footer">Copryght {new Date().getFullYear()}</footer>
     </div>
   );
 }
