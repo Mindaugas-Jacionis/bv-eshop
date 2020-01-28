@@ -3,23 +3,3 @@
   flex-direction: column;
   min-height: 100vh;
 }
-
-.Main {
-  max-width: 1020px;
-  margin: 0 auto;
-  flex-grow: 1;
-}
-
-.ProductsList ul {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.ProductsList .ProductsList__item {
-  background: blue;
-  display: inline-block;
-  padding: 10px 5px;
-  border: 1px solid #e1e1e1;
-  margin: 10px;
-  border-radius: 5px;
-}
