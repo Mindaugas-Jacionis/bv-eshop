@@ -1,0 +1,8 @@
+.ProductCard {
+  background: blue;
+  display: inline-block;
+  padding: 10px 5px;
+  border: 1px solid #e1e1e1;
+  margin: 10px;
+  border-radius: 5px;
+}
