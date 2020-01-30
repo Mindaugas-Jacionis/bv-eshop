@@ -6,11 +6,15 @@ class Cart extends React.Component {
     isVisible: false
   };
 
+  toggleVisibility = () => {
+    this.setState(prevState => ({ isVisible: !prevState.isVisible }));
+  };
+
   render() {
     const { isVisible } = this.state;
     const className = `Cart ${isVisible ? "Cart--active" : "Cart--inactive"}`;
     const Component = isVisible ? "div" : "button";
-    const props = isVisible ? {} : { onClick: () => this.setState({ isVisible: true }) };
+    const props = isVisible ? {} : { onClick: this.toggleVisibility };
 
     return (
       <Component className={className} {...props}>
@@ -21,7 +25,7 @@ class Cart extends React.Component {
         )}
         {isVisible && (
           <React.Fragment>
-            <button type="button" onClick={() => this.setState({ isVisible: false })}>
+            <button type="button" onClick={this.toggleVisibility}>
               X
             </button>
             <div>iamginary product</div>
