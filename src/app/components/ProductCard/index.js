@@ -1,7 +1,9 @@
 import React from "react";
 import "./index.css";
 
-function ProductCard({ title, description, price, currency }) {
+function ProductCard({ title, description, price, currency, id, onClick }) {
+  const buttonClick = () => onClick(id);
+
   return (
     <div className="ProductCard">
       <h3>{title}</h3>
@@ -10,7 +12,9 @@ function ProductCard({ title, description, price, currency }) {
         <p>
           {currency} {price}
         </p>
-        <button>Add to Cart</button>
+        <button type="button" onClick={buttonClick}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );
