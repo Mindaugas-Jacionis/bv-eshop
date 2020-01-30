@@ -4,6 +4,7 @@ import "./index.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
+import Cart from "./components/Cart";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Main />
       <Footer />
+      <Cart />
     </div>
   );
 }
