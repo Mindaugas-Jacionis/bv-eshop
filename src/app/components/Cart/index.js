@@ -1,6 +1,26 @@
 import React from "react";
 import "./index.css";
 
+function CartItem({ products, item, onRemove, incrementItem, decrementItem }) {
+  const { title } = products.find(product => item.id === product.id) || {};
+
+  return (
+    <div>
+      <span>{title}</span>
+      <div>
+        <button onClick={decrementItem}>-</button>
+        <span>{item.count}</span>
+        <button onClick={incrementItem}>+</button>
+      </div>
+      <button onClick={onRemove}>
+        <span role="img" aria-label="remove cart item illustration">
+          ❌
+        </span>
+      </button>
+    </div>
+  );
+}
+
 class Cart extends React.Component {
   state = {
     isVisible: false
@@ -12,6 +32,7 @@ class Cart extends React.Component {
 
   render() {
     const { isVisible } = this.state;
+    const { products, cart, removeFromCart, decrementItem, incrementItem } = this.props;
     const className = `Cart ${isVisible ? "Cart--active" : "Cart--inactive"}`;
     const Component = isVisible ? "div" : "button";
     const props = isVisible ? {} : { onClick: this.toggleVisibility };
@@ -28,9 +49,16 @@ class Cart extends React.Component {
             <button type="button" onClick={this.toggleVisibility}>
               X
             </button>
-            <div>iamginary product</div>
-            <div>imaginary product 2</div>
-            <div>imaginary product 3</div>
+            {cart.map(item => (
+              <CartItem
+                key={item.id}
+                incrementItem={() => incrementItem(item.id)}
+                decrementItem={() => decrementItem(item.id)}
+                onRemove={() => removeFromCart(item.id)}
+                products={products}
+                item={item}
+              />
+            ))}
           </React.Fragment>
         )}
       </Component>

@@ -44,8 +44,8 @@ function App() {
   const [cart, setCart] = useState([]);
 
   const addToCart = id => {
-    const itemIndex = cart.findIndex(item => item.id === id);
-    let newCart = cart;
+    let newCart = [...cart];
+    const itemIndex = newCart.findIndex(item => item.id === id);
 
     if (itemIndex > -1) {
       newCart[itemIndex].count = newCart[itemIndex].count + 1;
@@ -56,12 +56,44 @@ function App() {
     setCart(newCart);
   };
 
+  const removeFromCart = id => {
+    const newCart = cart.filter(item => item.id !== id);
+
+    setCart(newCart);
+  };
+
+  const incrementItem = id => {
+    let newCart = [...cart];
+    const itemIndex = newCart.findIndex(item => item.id === id);
+    console.log({ newCart, itemIndex });
+
+    newCart[itemIndex].count = newCart[itemIndex].count + 1;
+
+    setCart(newCart);
+  };
+
+  const decrementItem = id => {
+    let newCart = [...cart];
+    const itemIndex = newCart.findIndex(item => item.id === id);
+    const newCount = newCart[itemIndex].count - 1;
+
+    newCart[itemIndex].count = newCount > 0 ? newCount : 1;
+
+    setCart(newCart);
+  };
+
   return (
     <div className="App">
       <Header />
       <Main data={DATA} currency={CURRENCY} addToCart={addToCart} />
       <Footer />
-      <Cart cart={cart} />
+      <Cart
+        cart={cart}
+        products={DATA}
+        removeFromCart={removeFromCart}
+        incrementItem={incrementItem}
+        decrementItem={decrementItem}
+      />
     </div>
   );
 }
