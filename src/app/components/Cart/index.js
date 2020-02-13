@@ -59,6 +59,10 @@ class Cart extends React.Component {
     return null;
   }
 
+  // componentDidCatch(error, info) {
+  //   console.log("DID CATCH ERROR", { error, info });
+  // }
+
   toggleVisibility = () => {
     this.setState(prevState => ({ isVisible: !prevState.isVisible }));
   };

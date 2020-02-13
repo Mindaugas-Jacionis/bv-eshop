@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const CURRENCY = "$";
 const DATA = [
@@ -83,18 +84,31 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header />
-      <Main data={DATA} currency={CURRENCY} addToCart={addToCart} />
-      <Footer />
-      <Cart
-        cart={cart}
-        products={DATA}
-        removeFromCart={removeFromCart}
-        incrementItem={incrementItem}
-        decrementItem={decrementItem}
-      />
-    </div>
+    <ErrorBoundary
+      component={() => (
+        <div>
+          Whole app is down{" "}
+          <span role="img" aria-label="monkey closing it's eyes">
+            🔥
+          </span>
+        </div>
+      )}
+    >
+      <div className="App">
+        <Header />
+        <ErrorBoundary>
+          <Main data={DATA} currency={CURRENCY} addToCart={addToCart} />
+          <Cart
+            cart={cart}
+            products={DATA}
+            removeFromCart={removeFromCart}
+            incrementItem={incrementItem}
+            decrementItem={decrementItem}
+          />
+        </ErrorBoundary>
+        <Footer />
+      </div>
+    </ErrorBoundary>
   );
 }
 
