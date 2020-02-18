@@ -6,45 +6,33 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import ErrorBoundary from "./components/ErrorBoundary";
+// import Counter from "./components/Counter";
 
 const CURRENCY = "$";
-const DATA = [
-  {
-    title: "Microwave",
-    id: 0,
-    description: "Very Nice Short Description",
-    price: 30
-  },
-  {
-    title: "T-Shirt",
-    id: 1,
-    description: "Blue short sleeve t-shirt",
-    price: 15
-  },
-  {
-    title: "Toaster",
-    id: 2,
-    description: "Toasty toasty bread machine",
-    price: 45
-  },
-  {
-    title: "Cap",
-    id: 3,
-    description: "Snapback cap with logo on it",
-    price: 50
-  },
-  {
-    title: "Microwave",
-    id: 4,
-    description: "Very Nice Short Description",
-    price: 30
+
+class App extends React.Component {
+  state = {
+    cart: [],
+    products: [],
+    loading: false,
+    error: null
+  };
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    fetch("https://academy-year-2019.herokuapp.com/food-shop/products")
+      .then(response => response.json())
+      .then(products => {
+        this.setState({ products, loading: false });
+      })
+      .catch(() => {
+        this.setState({ error: "Ooops something went south", loading: false });
+      });
   }
-];
 
-function App() {
-  const [cart, setCart] = useState([]);
+  addToCart = id => {
+    const { cart } = this.state;
 
-  const addToCart = id => {
     let newCart = [...cart];
     const itemIndex = newCart.findIndex(item => item.id === id);
 
@@ -54,62 +42,77 @@ function App() {
       newCart = [...newCart, { id, count: 1 }];
     }
 
-    setCart(newCart);
+    this.setState({ cart: newCart });
   };
 
-  const removeFromCart = id => {
+  removeFromCart = id => {
+    const { cart } = this.state;
     const newCart = cart.filter(item => item.id !== id);
 
-    setCart(newCart);
+    this.setState({ cart: newCart });
   };
 
-  const incrementItem = id => {
+  incrementItem = id => {
+    const { cart } = this.state;
     let newCart = [...cart];
     const itemIndex = newCart.findIndex(item => item.id === id);
-    console.log({ newCart, itemIndex });
 
     newCart[itemIndex].count = newCart[itemIndex].count + 1;
 
-    setCart(newCart);
+    this.setState({ cart: newCart });
   };
 
-  const decrementItem = id => {
+  decrementItem = id => {
+    const { cart } = this.state;
     let newCart = [...cart];
     const itemIndex = newCart.findIndex(item => item.id === id);
     const newCount = newCart[itemIndex].count - 1;
 
     newCart[itemIndex].count = newCount > 0 ? newCount : 1;
 
-    setCart(newCart);
+    this.setState({ cart: newCart });
   };
 
-  return (
-    <ErrorBoundary
-      component={() => (
-        <div>
-          Whole app is down{" "}
-          <span role="img" aria-label="monkey closing it's eyes">
-            🔥
-          </span>
+  render() {
+    const { cart, products, loading, error } = this.state;
+
+    console.log("PRODUCTS", products);
+
+    return (
+      <ErrorBoundary
+        component={() => (
+          <div>
+            Whole app is down{" "}
+            <span role="img" aria-label="monkey closing it's eyes">
+              🔥
+            </span>
+          </div>
+        )}
+      >
+        <div className="App">
+          <Header />
+          {/* <Counter /> */}
+          <ErrorBoundary>
+            <Main
+              loading={loading}
+              error={error}
+              data={products}
+              currency={CURRENCY}
+              addToCart={this.addToCart}
+            />
+            <Cart
+              cart={cart}
+              products={products}
+              removeFromCart={this.removeFromCart}
+              incrementItem={this.incrementItem}
+              decrementItem={this.decrementItem}
+            />
+          </ErrorBoundary>
+          <Footer />
         </div>
-      )}
-    >
-      <div className="App">
-        <Header />
-        <ErrorBoundary>
-          <Main data={DATA} currency={CURRENCY} addToCart={addToCart} />
-          <Cart
-            cart={cart}
-            products={DATA}
-            removeFromCart={removeFromCart}
-            incrementItem={incrementItem}
-            decrementItem={decrementItem}
-          />
-        </ErrorBoundary>
-        <Footer />
-      </div>
-    </ErrorBoundary>
-  );
+      </ErrorBoundary>
+    );
+  }
 }
 
 export default App;

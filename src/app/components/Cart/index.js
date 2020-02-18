@@ -4,11 +4,11 @@ import "./index.css";
 import Timer from "../Timer";
 
 function CartItem({ products, item, onRemove, incrementItem, decrementItem }) {
-  const { title } = products.find(product => item.id === product.id) || {};
+  const { name } = products.find(product => item.id === product.id) || {};
 
   return (
     <div>
-      <span>{title}</span>
+      <span>{name}</span>
       <div>
         <button onClick={decrementItem}>-</button>
         <span>{item.count}</span>
