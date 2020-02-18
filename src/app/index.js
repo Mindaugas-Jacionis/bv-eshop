@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+
 import "./index.css";
 
 import Header from "./components/Header";
@@ -93,20 +95,34 @@ class App extends React.Component {
           <Header />
           {/* <Counter /> */}
           <ErrorBoundary>
-            <Main
-              loading={loading}
-              error={error}
-              data={products}
-              currency={CURRENCY}
-              addToCart={this.addToCart}
-            />
-            <Cart
-              cart={cart}
-              products={products}
-              removeFromCart={this.removeFromCart}
-              incrementItem={this.incrementItem}
-              decrementItem={this.decrementItem}
-            />
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <React.Fragment>
+                    <Main
+                      loading={loading}
+                      error={error}
+                      data={products}
+                      currency={CURRENCY}
+                      addToCart={this.addToCart}
+                    />
+                    <Cart
+                      cart={cart}
+                      products={products}
+                      removeFromCart={this.removeFromCart}
+                      incrementItem={this.incrementItem}
+                      decrementItem={this.decrementItem}
+                    />
+                  </React.Fragment>
+                </Route>
+                <Route exact path="/404">
+                  <div>
+                    <p>You're Lost Pal :(</p>
+                  </div>
+                </Route>
+                <Redirect to="/404" />
+              </Switch>
+            </Router>
           </ErrorBoundary>
           <Footer />
         </div>
