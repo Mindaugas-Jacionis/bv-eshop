@@ -1,11 +1,16 @@
 .Main {
+  box-sizing: border-box;
   max-width: 1020px;
+  padding: 0 10px;
+  width: 100%;
   margin: 0 auto;
   flex-grow: 1;
+  padding-top: 50px;
 }
 
 .ProductsList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
   justify-content: center;
+  grid-gap: 10px;
 }
