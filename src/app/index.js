@@ -9,13 +9,24 @@ import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import ErrorBoundary from "./components/ErrorBoundary";
 
+import useTimer from "./hooks/useTimer";
+
 const CURRENCY = "$";
 
-function App() {
+function App(props) {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const { time, clear } = useTimer();
+  // const { time: times } = useTimer(5);
+
+  useEffect(() => {
+    if (time === 1) {
+      clear();
+    }
+  }, [clear, time]);
 
   const getProducts = async () => {
     setLoading(true);
@@ -84,6 +95,8 @@ function App() {
       <div className="App">
         <Header />
         {/* <Counter /> */}
+        <h1 style={{ marginLeft: "50px" }}>{time}</h1>
+        {/* <h1 style={{ marginLeft: "40px" }}>{times}</h1> */}
         <ErrorBoundary>
           <Router>
             <Switch>
